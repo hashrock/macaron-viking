@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>macaron-viking</title>
+    <link rel="stylesheet" href="./main.css" />
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .side {
+        width: 20rem;
+        display: block;
+        height: 100%;
+        padding: 0.5em;
+      }
+      .editor {
+        flex: 1;
+        height: 100%;
+      }
+    </style>
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <div class="side">
+      <h1>マカロン食べ放題</h1>
+      <h3>Macaron viking</h3>
+
+      <ul class="list"></ul>
+    </div>
+    <macaron-editor class="editor" id="editor"></macaron-editor>
+    <script>
+      async function load(file) {
+        const editor = document.getElementById("editor");
+        const data = await fetch(file);
+        const contents = await data.text();
+        editor.setAttribute("value", contents);
+      }
+
+      async function main() {
+        const menus = [
+          {
+            label: "Button",
+            file: "button.macaron",
+          },
+          {
+            label: "Dialog",
+            file: "dialog.macaron",
+          },
+        ];
+        const list = document.querySelector(".list");
+        for (const menu of menus) {
+          const li = document.createElement("li");
+          li.innerText = menu.label;
+          li.addEventListener("click", () => {
+            load(menu.file);
+          });
+          list.appendChild(li);
+        }
+
+        const editor = document.querySelector("#editor");
+        const content = await fetch("basic.macaron");
+        editor.setAttribute("value", await content.text());
+      }
+      main();
+    </script>
+  </body>
+</html>
