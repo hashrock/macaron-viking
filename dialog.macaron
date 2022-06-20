@@ -1,0 +1,52 @@
+<style>
+  :root {
+  }
+</style>
+<macaron-component name="my-component">
+  <macaron-variant x="190" y="114"></macaron-variant>
+  <template>
+    <div id="div">Title</div>
+    <div id="div1"></div>
+  </template>
+  <style>
+    :host {
+      position: relative;
+      width: 424px;
+      height: 379px;
+      display: block;
+    }
+    #div {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 424px;
+      height: 27px;
+      display: flex;
+      padding-left: 0.5em;
+      align-items: center;
+      color: #ffffff;
+      font-size: 12px;
+      background: #000000;
+    }
+    #div1 {
+      position: absolute;
+      top: 27px;
+      left: 0px;
+      width: 424px;
+      height: 352px;
+      background: #ffffff;
+      border-top-width: 4px;
+      border-top-style: solid;
+      border-top-color: #c9c9c9;
+      border-right-width: 4px;
+      border-right-style: solid;
+      border-right-color: #c9c9c9;
+      border-bottom-width: 4px;
+      border-bottom-style: solid;
+      border-bottom-color: #c9c9c9;
+      border-left-width: 4px;
+      border-left-style: solid;
+      border-left-color: #c9c9c9;
+    }
+  </style>
+</macaron-component>

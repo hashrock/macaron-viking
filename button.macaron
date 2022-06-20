@@ -1,0 +1,47 @@
+<style>
+  :root {
+  }
+</style>
+<macaron-component name="my-component">
+  <macaron-variant x="160" y="54"></macaron-variant>
+  <template>
+    <div>
+      <div id="button1"><slot>Button</slot></div>
+    </div>
+  </template>
+  <style>
+    :host {
+      display: block;
+    }
+    #button1 {
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      border-bottom-right-radius: 24px;
+      border-bottom-left-radius: 24px;
+      display: flex;
+      padding-right: 14px;
+      padding-left: 14px;
+      row-gap: 10px;
+      column-gap: 10px;
+      color: white;
+      font-family: Readex Pro;
+      font-weight: 800;
+      font-size: 14px;
+      line-height: 40px;
+      letter-spacing: -0.02em;
+      background: #000000;
+      border-top-width: 1.5px;
+      border-top-style: solid;
+      border-top-color: var(--brand-color);
+      border-right-width: 1.5px;
+      border-right-style: solid;
+      border-right-color: var(--brand-color);
+      border-bottom-width: 1.5px;
+      border-bottom-style: solid;
+      border-bottom-color: var(--brand-color);
+      border-left-width: 1.5px;
+      border-left-style: solid;
+      border-left-color: var(--brand-color);
+    }
+  </style>
+</macaron-component>

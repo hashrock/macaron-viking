@@ -18,7 +18,7 @@
         align-items: center;
       }
       .side {
-        width: 20rem;
+        width: 15rem;
         display: block;
         height: 100%;
         padding: 0.5em;
@@ -27,13 +27,25 @@
         flex: 1;
         height: 100%;
       }
+      li {
+        list-style: none;
+        cursor: pointer;
+      }
+      h1{
+        margin: 0;
+        font-size: 120%;
+      }
+      h3{
+        margin: 0;
+        font-size: 50%;
+      }
     </style>
     <script type="module" src="./main.js"></script>
   </head>
   <body>
     <div class="side">
-      <h1>マカロン食べ放題</h1>
-      <h3>Macaron viking</h3>
+      <h1>Macaron viking</h1>
+      <h3>マカロン食べ放題</h3>
 
       <ul class="list"></ul>
     </div>
@@ -66,10 +78,6 @@
           });
           list.appendChild(li);
         }
-
-        const editor = document.querySelector("#editor");
-        const content = await fetch("basic.macaron");
-        editor.setAttribute("value", await content.text());
       }
       main();
     </script>
