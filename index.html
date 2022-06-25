@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,55 +13,73 @@
       body {
         height: 100%;
       }
+
       body {
         margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
       }
+
       .side {
         width: 15rem;
         display: block;
         height: 100%;
-        padding: 0.5em;
+        padding: 0 0.5em;
       }
+
       .editor {
         flex: 1;
         height: 100%;
       }
-      li {
+
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      li.item {
         list-style: none;
         cursor: pointer;
+        margin: 0;
+        padding: 0.25em 0.5em;
       }
-      h1{
+
+      li.item:hover {
+        background-color: #edebff;
+      }
+      li.item.selected {
+        background-color: #ddd9ff;
+        color: #070145;
+        font-weight: 700;
+      }
+
+      h1 {
         margin: 0;
         font-size: 120%;
       }
-      h3{
+
+      h3 {
         margin: 0;
         font-size: 50%;
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script type="module" src="./main.js"></script>
   </head>
+
   <body>
-    <div class="side">
+    <div class="side" id="app">
       <h1>Macaron viking</h1>
       <h3>マカロン食べ放題</h3>
 
-      <ul class="list"></ul>
+      <ul class="list" v-for="item in list">
+        <li class="item" :class="{ 'selected': item.file === current }" @click="load(item.file)">{{ item.label }}</li>
+      </ul>
     </div>
     <macaron-editor class="editor" id="editor"></macaron-editor>
     <script>
-      async function load(file) {
-        const editor = document.getElementById("editor");
-        const data = await fetch(file);
-        const contents = await data.text();
-        editor.setAttribute("value", contents);
-      }
-
-      async function main() {
-        const menus = [
+      const menus = [
           {
             label: "Button",
             file: "button.macaron",
@@ -68,18 +88,36 @@
             label: "Dialog",
             file: "dialog.macaron",
           },
-        ];
-        const list = document.querySelector(".list");
-        for (const menu of menus) {
-          const li = document.createElement("li");
-          li.innerText = menu.label;
-          li.addEventListener("click", () => {
-            load(menu.file);
-          });
-          list.appendChild(li);
+        ];      
+      new Vue({
+        el: "#app",
+        data: {
+          list: menus,
+          current: null,
+        },
+        methods:{
+          async load(file){
+            this.current = file;
+            const editor = document.getElementById("editor");
+            const data = await fetch(file);
+            const contents = await data.text();
+            editor.setAttribute("value", contents);
+          }
+        },
+        mounted(){
+          this.load(menus[0].file);
         }
+      })
+
+
+      async function load(file) {
+        const editor = document.getElementById("editor");
+        const data = await fetch(file);
+        const contents = await data.text();
+        editor.setAttribute("value", contents);
       }
-      main();
+
     </script>
   </body>
-</html>
+
+  </html>
